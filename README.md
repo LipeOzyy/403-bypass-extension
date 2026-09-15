@@ -23,3 +23,6 @@ Browser Extension (Chrome/Edge/Brave, Manifest V3). Upon encountering an endpoin
 3. Click Load unpacked.
 4. Select the 403-bypass-extension folder.
 5. Pin the extension to your toolbar. When you encounter a 403 error, click the icon → Start bypass.
+
+## Reference:
+[gankd/403bypasser](https://github.com/g4nkd/403bypasser)
