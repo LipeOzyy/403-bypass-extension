@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="popup.css" />
+  <title>403 Bypass Assistant</title>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="logo">403</span>
+      <span class="brand-name">Bypass Assistant</span>
+    </div>
+    <span class="badge" id="authBadge" title="Only run against systems you are authorized to test">authorized use only</span>
+  </header>
+
+  <section class="target">
+    <label for="url">Target endpoint</label>
+    <input type="text" id="url" spellcheck="false" placeholder="https://target/admin" />
+    <div class="opts">
+      <label class="chk"><input type="checkbox" id="c-path" checked> Path/Case</label>
+      <label class="chk"><input type="checkbox" id="c-encoding" checked> Encoding</label>
+      <label class="chk"><input type="checkbox" id="c-param" checked> Params</label>
+      <label class="chk"><input type="checkbox" id="c-headers" checked> Headers/Rewrite</label>
+      <label class="chk"><input type="checkbox" id="c-methods" checked> Methods</label>
+      <label class="chk"><input type="checkbox" id="c-creds" checked title="Send your current cookies/session with each request">Cookies</label>
+    </div>
+    <div class="opts rate-row">
+      <label for="rate" class="rate-label">Speed</label>
+      <select id="rate">
+        <option value="polite">Polite — ~5 req/s (gentle)</option>
+        <option value="normal" selected>Normal — ~12 req/s (recommended)</option>
+        <option value="fast">Fast — ~25 req/s (lab / strong targets)</option>
+      </select>
+      <span class="throttle" id="throttle" hidden>⏳ backing off (429/503)</span>
+    </div>
+  </section>
+
+  <section class="controls">
+    <button id="startBtn" class="primary">▶ Start bypass</button>
+    <button id="stopBtn" class="ghost" disabled>■ Stop</button>
+    <button id="clearBtn" class="ghost">Clear</button>
+  </section>
+
+  <section class="status" id="statusBar">
+    <div class="baseline" id="baseline">Baseline: —</div>
+    <div class="progress">
+      <div class="bar"><div class="fill" id="progFill"></div></div>
+      <div class="count" id="progCount">0 / 0</div>
+    </div>
+  </section>
+
+  <section class="summary" id="summary"></section>
+
+  <section class="filters">
+    <div class="filter-chips" id="filterChips">
+      <button data-f="all" class="active">All</button>
+      <button data-f="success">2xx</button>
+      <button data-f="redirect">3xx</button>
+      <button data-f="changed">Changed</button>
+      <button data-f="error">Errors</button>
+    </div>
+    <button id="copyBtn" class="ghost small">Copy CSV</button>
+  </section>
+
+  <section class="results">
+    <table>
+      <thead>
+        <tr><th>#</th><th>Cat</th><th>Technique</th><th>M</th><th>Status</th><th>Size</th><th>ms</th></tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="empty">No results yet. Enter a 403 endpoint and hit <b>Start bypass</b>.</div>
+  </section>
+
+  <footer>
+    <span id="note">Browser normalizes literal <code>../</code>, <code>\</code> and <code>#</code> before sending — rows marked <span class="norm-flag">~</span> may not reach the server raw. Use Burp/curl to confirm hits.</span>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

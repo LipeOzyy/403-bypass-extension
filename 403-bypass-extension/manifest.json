@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "403 Bypass Assistant",
+  "version": "1.0.0",
+  "description": "Authorized pentest helper: tests common HTTP 403 Forbidden bypass techniques (path, headers, methods, params, encoding) against an endpoint.",
+  "permissions": [
+    "declarativeNetRequest",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "403 Bypass Assistant",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
